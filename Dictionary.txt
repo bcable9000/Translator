@@ -1,0 +1,13 @@
+hello,hola,hi
+bye,adios
+wolf,el lobo,noun
+to eat,comer,verb
+to go,ir,verb
+lumberjack,el leñador,noun
+to want,querer,verb
+knowledge,el conocimiento,noun
+foam,la espuma,noun
+to collect,recoger,verb
+threshold,el umbral,noun
+racket,el boche,noun
+to hang up,colgar,verb

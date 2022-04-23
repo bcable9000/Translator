@@ -1,0 +1,20 @@
+1/24/22 - removed hard-coded dictionary and added dictionary.txt 
+	- added methods to extract dictionary from dictionary.txt and use it as normal dictionary (this doesn't sound like a lot but it took a long time and I'm happy I got it to work)
+	- changed "while not input" slightly so that it detects when the input changes at all, not when it's false. This allows hitting "enter" to also break the loop
+1/23/22 - slight optimization with conjugation()\n
+        - made flashcards() and langmodeselect() into their own functions (they were part of main() before)
+	- added confirmation before exiting program
+	- added "while not input()" loops for informaton (i.e. changelog) so that users can indicate when they are ready to move on
+	- made "the" not count (i.e. "the wolf" used to be counted wrong for "el lobo" because it expected only "wolf", but now it is also right)
+	- slightly improved readability of script (added comments, organized things better, etc.)
+	- total number of lines: 259
+1/21/22 - main() implemented, with 5 functions so far (Start, View Words, View English Words, Practice Sentences, and Changelog
+        - Basic present tense conjugation implemented
+        - 3 sentences implemented, using a combination of random nouns, verbs, and subjects
+        - small list of irregular verbs added, along with easy way to use them
+        - 11 words total added (mostly wanted to focus on code before adding words)
+        - added langmode to allow only english->spanish or vice versa if desired
+	- total number of lines: 209
+4/23/22 - After a long break, a breakthrough occured: I could just use an already existing translator to make my life a LOT easier
+	- Implemented a very simple version of googletrans 4.0.0
+	- will keep a backup of the old code so I have it if I need it, but will likely restructure and clean up most of the code now
