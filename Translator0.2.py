@@ -1,5 +1,6 @@
 import time
 import random
+from Conjugation import conjugate
 from googletrans import Translator
 translator = Translator(service_urls=['translate.google.com'])
 
@@ -7,7 +8,7 @@ translator = Translator(service_urls=['translate.google.com'])
 
 #Initializing variables#
 
-
+##Creating an array of all the words
 file = open("./Dictionary.txt", "r")
 temp = file.readline().split()
 english = {}
@@ -20,8 +21,15 @@ while temp[0]:
 file.close()
 
 i = 0
+
+##Creating parts of sentences 
 nouns = {}
 verbs = {}
+for i in english:
+    if "noun" in english[i]:
+        nouns[len(nouns)] = english[i]
+    elif "verb" in english[i]:
+        verbs[len(verbs)] = english[i]       
 subjects = {
     0 : ("I", "yo"),
     1 : ("you", "tú"),
@@ -34,16 +42,10 @@ subjects = {
     8 : ("they (m)", "ellos"),
     9 : ("they (f)", "ellas"),
 }
-
 tenses = ("present")
-for i in english:
-    if "noun" in english[i]:
-        nouns[len(nouns)] = english[i]
-    elif "verb" in english[i]:
-        verbs[len(verbs)] = english[i]
-english.update({5: ("lumberjack", "el leñador", "noun")})
+
 words = len(english)
-translation = "";
+translation = ""
 
 print(f"""Welcome to Translator 0.1
 This is still in Beta so please be patient, as some functions may not work or will work incorrectly
@@ -57,9 +59,13 @@ def flashcards():
     temp = ''
     answer = ''
     langmode = langmodeselect()
+    repeats = 0
     #Start loop
     while answer not in ("stop", "exit", "quit"):    
-        time.sleep(1)
+        if repeats > 0:
+            input()
+        else:
+            repeats = 1
         rng = random.randrange(0,words)
         ##Lang 1 is English->Spanish, Lang 2 is vice versa##
         if langmode == '1':
@@ -90,8 +96,8 @@ def flashcards():
 def createsentence():
     ##Initializes variables##
     langmode = langmodeselect()
-    time.sleep(1)
     answer = ''
+    repeats = 0
     while answer not in ("stop", "exit", "quit"):    
         if langmode == '1':
             lang = 1
@@ -99,14 +105,19 @@ def createsentence():
             lang = 2
         else:
             lang = random.randrange(1,3)
+        if repeats > 0:
+            input()
+        else:
+            repeats = 1
         noun = nouns[random.randrange(0,len(nouns))]
         verb = verbs[random.randrange(0,len(verbs))]
         subject = subjects[random.randrange(0,len(subjects))]
-##        print(f'''
-##            Verb is: {verb}
-##            noun is: {noun}
-##            subject is: {subject}
-##            ''')
+        print(f'''
+            Verb is: {verb}
+            noun is: {noun}
+            subject is: {subject}
+            language: {lang}
+            ''')
         sentences = { ##The pre-made sentences that are used, similar to Mad-Libs##
             0 : (f'{subject[0]} {conjugate ("to want", "present", subject[0])} {verb[0]} with the {noun[0]}',
                  f'{subject[1]} {conjugate ("querer", "present", subject[1])} {verb[1]} con {noun[1]}'),
@@ -116,6 +127,7 @@ def createsentence():
                  f'{subject[1]} {conjugate(verb[1], "present", subject[1])} {noun[1]}')
         }
         rng = random.randrange(0, len(sentences))
+        print(f'Number was: {rng}')
         ##Lang 1 is English->Spanish, Lang 2 is vice versa##
         if lang == 1:
             answer = input(f'\nSentence:\n{sentences[rng][0].capitalize()}.\n')
@@ -136,89 +148,6 @@ def createsentence():
             else:
                 print(f'Correct sentence: \n{sentences[rng][0].capitalize()}.')
 
-
-def conjugate(verb, tense, subject): ##subjects are: I, you, it (third person singular), they (third person plural), and we
-    ##Initializing variables
-    ending = verb[(len(verb) - 2):]
-    conjugation = ''
-    i = 0
-    if subject in ("yo"):
-        subject = "I"
-    elif subject in ("tú", "usted", "you (formal)"):
-        subject = "you"
-    elif subject in ("he", "she", "ella", "él"):
-        subject = "it"
-    elif subject in ("they (f)", "they (m)", "they (formal)", "ellos", "ellas", "ustedes"):
-        subject = "they"
-    elif subject in ("we (f)", "we (m)", "nosotros", "nosotras"):
-        subject = "we"
-    ##Irregular Verb Land##
-    irregverbs = {
-        #4
-        'ir': {
-            'present' : {
-                'I' : 'voy a', "you" : "vas a", "it" : "va a", "they" : "van a", "we" : "vamos a"}},
-        'to go' : {
-            'present' : {
-                'I' : 'go to', 'you' : 'go to', 'it' : 'goes to', 'they' : 'go to', 'we' : 'go to'}},
-        #6
-        'querer' : {
-            'present' : {
-                'I' : 'quiero', 'you' : 'quieres', 'it' : 'quiere', 'they' : 'quieren', 'we' : 'queremos'}},
-    }
-    if verb in irregverbs:
-        if tense in irregverbs[verb]:
-            if subject in irregverbs[verb][tense]:
-                return irregverbs[verb][tense][subject]
-    
-    ##Checks to see if ending is spanish, conjugates in English if it is not##
-    if ending in ("er", "ir", "ar"):
-        conjugation += verb[:(len(verb) - 2)]
-        #while i < (len(verb) - 2):
-        #       conjugation += verb[i]
-        #       i += 1
-    else:
-        i = 3
-        while i < (len(verb)):
-            conjugation += verb[i]
-            i += 1
-        if tense == "present":
-            if subject == "it":
-                conjugation += "s"
-        return conjugation
-    
-    ##Spanish conjugations##
-    if subject == "I":
-        if tense == "present":
-            conjugation += "o"
-    elif subject == "you":
-        if tense == "present":
-            if ending == "ar":
-                conjugation += "as"
-            else:
-                conjugation += "es"
-    elif subject == "it":
-        if tense == "present":
-            if ending == "ar":
-                conjugation += "a"
-            else:
-                conjugation += "e"
-    elif subject == "they":
-        if tense == "present":
-            if ending == "ar":
-                conjugation += "an"
-            else:
-                conjugation += "en"
-    elif subject == "we":
-        if tense == "present":
-            if ending == "ar":
-                conjugation += "amos"
-            elif ending == "ir":
-                conjugation += "imos"
-            else:
-                conjugation += "emos"
-    return conjugation
-
 def changelog():
     print()
     file1 = open("./changelog.txt", "r")
@@ -226,8 +155,12 @@ def changelog():
     file1.close()
 
 def main ():
+    repeats = 0
     while True:
-        time.sleep(1)
+        if repeats > 0:
+            time.sleep(1)
+        else:
+            repeats = 1
         mode = input("\nWhat would you like to do?\n1. Start Flashcards \n2. Work with sentences\n3. See all words\n4. See all English words\n5. View Changelog\n")
         if mode == "1" or mode.lower() == "start":
             flashcards()
@@ -265,5 +198,3 @@ def main ():
         print('Thanks for playing!')
 
 main()
-
-
