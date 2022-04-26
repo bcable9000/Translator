@@ -1,0 +1,58 @@
+colgar:
+  present:
+    it: colga
+    they: colgan
+comer:
+  present:
+    it: come
+    they: comen
+    you: comes
+ir:
+  present:
+    I: voy a
+    it: va a
+    they: van a
+    we: vamos a
+    you: vas a
+querer:
+  present:
+    I: quiero
+    it: quiere
+    they: quieren
+    we: queremos
+    you: quieres
+recoger:
+  present:
+    it: recoge
+to collect:
+  present:
+    it: collects
+    they: collect
+to eat:
+  present:
+    it: eats
+    they: eat
+    you: eat
+to go:
+  present:
+    I: go to
+    it: goes to
+    they: go to
+    we: go to
+    you: go to
+to hang up:
+  present:
+    it: hang ups
+    they: hang up
+    you: hang up
+to run:
+  present:
+    I: run
+    it: runs
+    we: run
+to want:
+  present:
+    it: wants
+    they: want
+    we: want
+    you: want

@@ -1,12 +1,13 @@
 from googletrans import Translator
 import json
+import yaml
+import pprint
 translator = Translator(service_urls=['translate.google.com'])
 
 def checkfile(verb,tense,subject):
     #Opens the file and creates dict
-    with open('conjugations.txt') as f:
-        data = f.read()
-    iverbs = json.loads(data)
+    with open('conjugations.yml', 'r') as yaml_file:
+        iverbs = yaml.safe_load(yaml_file)
     
     if verb in iverbs:
         if tense in iverbs[verb]:
@@ -16,12 +17,11 @@ def checkfile(verb,tense,subject):
 
 def writefile(verb,tense,subject,conjugation):
     ##Open file, create dict with iverbs
-    with open('conjugations.txt') as f:
-        data = f.read()
-    iverbs = json.loads(data)
+    with open('conjugations.yml', 'r') as yaml_file:
+        iverbs = yaml.safe_load(yaml_file)
     
     #Allows user to verify/change verb conjugations before they are added
-    check = input(f'What is the correct conjugation of \'{subject} {conjugation} ({tense})\'?\n(leave blank if correct)\n')
+    check = input(f'What is the correct conjugation of \'{subject} {conjugation} ({verb},{tense})\'?\n(leave blank if correct)\n')
     if  check != '':
         conjugation = check
 
@@ -38,8 +38,8 @@ def writefile(verb,tense,subject,conjugation):
         iverbs[verb] = {tense:{subject:conjugation}}
 
     ##write iverbs to file
-    with open('conjugations.txt', 'w') as convert_file: 
-        convert_file.write(json.dumps(iverbs))
+    with open('conjugations.yml', 'w') as yaml_file:
+     yaml.dump(iverbs, stream=yaml_file, default_flow_style=False)
         
     return 0
 
@@ -47,9 +47,9 @@ def conjugate(verb, tense, subject): ##subjects are: I, you, it (third person si
     ##need to change subject to ensure it matches
     if subject in ("yo"):
         subject = "I"
-    elif subject in ("tú", "usted", "you (formal)"):
+    elif subject in ("tú"):
         subject = "you"
-    elif subject in ("he", "she", "ella", "él"):
+    elif subject in ("he", "she", "ella", "él", "usted", "you (formal)"):
         subject = "it"
     elif subject in ("they (f)", "they (m)", "they (formal)", "ellos", "ellas", "ustedes"):
         subject = "they"
@@ -113,13 +113,12 @@ def hardcodeDirectory():
     }
 
     ##Writes Directory to file
-    with open('conjugations.txt', 'w') as convert_file: 
-        convert_file.write(json.dumps(iverbs))
+    with open('conjugations.yml', 'w') as yaml_file:
+     yaml.dump(iverbs, stream=yaml_file, default_flow_style=False)
 
     ##Read Dictionary from file
-    with open('conjugations.txt') as f:
-        data = f.read()
-    iverbs = json.loads(data)
+    with open('conjugations.yml', 'r') as yaml_file:
+        iverbs = yaml.safe_load(yaml_file)
       
     ##print("Data type after reconstruction : ", type(js))
     print(iverbs)
@@ -130,3 +129,5 @@ def test():
     if  check != '':
         conjugation = check
     print(conjugation)
+
+

@@ -1,3 +1,7 @@
+4/25/22 | v0.2
+	- changed conjugations.txt to conjugations.yml to improve readability of file
+	- might change dictionary.txt in a similar way, but not sure yet
+	- total time today: < 1 hour
 4/24/22 | v0.2
 	- Created a text file to act as a cache for conjugations, both speeding up the process and reducing the number of errors due to googletrans
 	- When storing a conjugation, the user is asked if it is the right conjugation (to prevent problems when translating back and forth)
