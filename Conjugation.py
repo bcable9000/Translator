@@ -1,8 +1,8 @@
-from googletrans import Translator
+from pygoogletranslation import Translator
 import json
 import yaml
 import pprint
-translator = Translator(service_urls=['translate.google.com'])
+translator = Translator()
 
 def checkfile(verb,tense,subject):
     #Opens the file and creates dict
@@ -72,30 +72,28 @@ def conjugate(verb, tense, subject): ##subjects are: I, you, it (third person si
     translation = ''
     i = 0
     
-    ##If it's spanish, turns it into English and then conjugates the english verson
+    ##If it's spanish, turns it into English
     if language == 1:
-        translation = translator.translate(verb, src="es", dest="en")
-        verb2 = translation.text
-        check = checkfile(verb2, tense, subject)
-        if check:
-            conjugation = check
-        elif tense == "present":
-            if subject == "it":
-                conjugation += verb2 + "s"
+        translation = translator.translate(verb,src='es',dest='en')
+        translation = translation.text
     ##If it's English, conjugate as normal
-    if language == 0:
-        if tense == "present":
-            if subject == "it":
-                conjugation += verb + "s"
-            else:
-                conjugation = verb
-        conjugation = conjugation[3:]
-    else: ##if not english, turn back into spanish using conjugated English 
-        translation = translator.translate(conjugation, src="en", dest="es")
-        conjugation = translation.text
+    if tense == "present":
+        if subject == "it":
+            conjugation += verb + "s"
+        else:
+            conjugation = verb
+    conjugation = conjugation[3:]
+    if language == 1:
+        translation = translator.translate(subject + ' '+ verb,src='es',dest='en')
+        translation = translation.text
+        
     writefile(verb,tense,subject,conjugation)
     return conjugation
-    
+
+def test2(verb):
+    translation2 = translator.translate(verb, src='es', dest='en')
+    print(translation2.text)
+
 def hardcodeDirectory():
     ##Only use if you want to replace the current directory with a hard-coded one
     iverbs = { #iverbs = irregular verbs
