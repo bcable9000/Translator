@@ -1,10 +1,24 @@
+[Note: Time spent and lines of code is meant mostly to track my own progress. Hence, it will not always be present in every entry]
+
+9/18/22 | v0.2
+	- In Conjugation.py, switched from using googletrans API to pygoogletranslation API
+	- Fixed errors that occured when using pygoogletranslation by modifying the files
+	- Working on new plans for conjugating Spanish verbs, as to minimize erros as well as minimize hard-coding/asking the user.
+	- Fixed bug where the first line of Dictionary.txt was being read incorrectly, causing program to crash when trying to use those words.
+	- Total lines of Python Code: 334
+	- Time invested today: ~2 hours
+
+4/25/22 | v0.2
+	- changed conjugations.txt to conjugations.yml to improve readability of file
+	- might change dictionary.txt in a similar way, but not sure yet
+	- Time invested today: < 1 hour
 4/24/22 | v0.2
 	- Created a text file to act as a cache for conjugations, both speeding up the process and reducing the number of errors due to googletrans
 	- When storing a conjugation, the user is asked if it is the right conjugation (to prevent problems when translating back and forth)
 	- Users now have to hit any key before Translator.py goes to next 'activity' (e.g. if you're doing sentences, it'll wait until you hit a key to go to the next sentence after you give an answer so you have time to look at the correct answer/see if you wer right)
 	- checkfile() and writefile() are their own functional functions, allowing conjugate() to check if a conjugation is already cached (checkfile), and storing it if it is not (writefile)
-	- total lines of code (Conjugation.py + Translator.py) = 332
-	- time spent today: ~ 2 hours
+	- Total lines of Python code: 332
+	- Time invested today: ~ 2 hours
 4/23/22 | v0.1
 	- googletrans is mostly working, but takes a while
 	- working on a method to store conjugations in a sort of cache using json (storing in a txt file though; had trouble with .json files)

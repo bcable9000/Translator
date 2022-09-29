@@ -9,15 +9,17 @@ translator = Translator(service_urls=['translate.google.com'])
 #Initializing variables#
 
 ##Creating an array of all the words
-file = open("./Dictionary.txt", "r")
-temp = file.readline().split()
+file = open("./Dictionary.txt", "r", encoding="utf8")
 english = {}
 i = 0
-while temp[0]:
-    english[i] = temp
-    print(temp)
+while True:
     temp = file.readline().replace('\n', '').split(',')
+    if temp == ['']:
+        break
+    print(temp)
+    english[i] = temp
     i += 1
+print()    
 file.close()
 
 i = 0
@@ -73,11 +75,13 @@ def flashcards():
         elif langmode == '2':
             lang = 2
         else:
-            lang = random.randrange(0,2)
+            lang = random.randrange(1,2)
         if lang == 1:
             answer = input(f"{english[rng][0]}\n")
             answer = answer.lower()
-            if answer in english[rng] or answer[4:] in english[rng]:
+            #Sometimes an English word can translate to 2 or more spanish words
+            #So as long as answer is one of them it's correct
+            if answer in english[rng] and answer != english[rng][0]:
                 print('Congratulations! You got it right\n')
             elif answer not in ("stop", "exit", "quit"):
                 x = english[rng][1]
@@ -86,10 +90,10 @@ def flashcards():
         elif lang == 2:   
             answer = input(f"{english[rng][1]}\n")
             answer = answer.lower()
-            if answer in english[rng] or answer[4:] in english[rng]:
+            if answer == english[rng][0]:
                 print('Congratulations! You got it right\n')
             elif answer not in ("stop", "exit", "quit"):
-                x = english[rng][1]
+                x = english[rng][0]
 ##                print(f'You guessed: {answer}')
                 print(f'Correct word: {x}\n')
                 

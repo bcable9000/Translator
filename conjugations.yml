@@ -1,0 +1,72 @@
+colgar:
+  present:
+    I: cuelgo
+    it: colga
+    they: colgan
+    we: colgamos
+comer:
+  present:
+    I: como
+    it: come
+    they: comen
+    we: comemos
+    you: comes
+hablar:
+  present:
+    it: habla
+ir:
+  present:
+    I: voy a
+    it: va a
+    they: van a
+    we: vamos a
+    you: vas a
+querer:
+  present:
+    I: quiero
+    it: quiere
+    they: quieren
+    we: queremos
+    you: quieres
+recoger:
+  present:
+    it: recoge
+to collect:
+  present:
+    I: collect
+    it: collects
+    they: collect
+    we: collect
+to eat:
+  present:
+    I: eat
+    it: eats
+    they: eat
+    we: eat
+    you: eat
+to go:
+  present:
+    I: go to
+    it: goes to
+    they: go to
+    we: go to
+    you: go to
+to hang up:
+  present:
+    I: hang up
+    it: hangs ups
+    they: hang up
+    we: hang up
+    you: hang up
+to run:
+  present:
+    I: run
+    it: runs
+    we: run
+to want:
+  present:
+    I: want
+    it: wants
+    they: want
+    we: want
+    you: want
