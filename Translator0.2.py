@@ -1,7 +1,7 @@
 import time
 import random
 from Conjugation import conjugate
-from googletrans import Translator
+from pygoogletranslation import Translator
 translator = Translator(service_urls=['translate.google.com'])
 
 ###imports###
